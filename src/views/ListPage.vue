@@ -1,7 +1,9 @@
 <template>
-  <div class="page__jsplumb">
-    <div ref="jsplumbContainer" id="jsplumbContainer" class="jsplumb__container"></div>
-  </div>
+  <Transition name="fade" mode="out-in">
+    <div class="page__jsplumb">
+      <div ref="jsplumbContainer" id="jsplumbContainer" class="jsplumb__container"></div>
+    </div>
+  </Transition>
 </template>
 
 <script>

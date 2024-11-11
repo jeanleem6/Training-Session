@@ -22,10 +22,8 @@ onMounted(() => {
   <main-menus></main-menus>
   <PreLoader v-if="isLoading.state" :class="currentTheme.state" />
   <router-view v-show="!isLoading.state" v-slot="{ Component }">
-    <transition>
-      <keep-alive>
-        <component :is="Component" />
-      </keep-alive>
-    </transition>
+    <keep-alive>
+      <component :is="Component" />
+    </keep-alive>
   </router-view>
 </template>
