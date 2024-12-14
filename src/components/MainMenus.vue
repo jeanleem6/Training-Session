@@ -1,5 +1,5 @@
 <template>
-  <el-menu :default-active="activeIndex" mode="horizontal" class="el-menu-vertical-demo" @select="handleSelect">
+  <el-menu :default-active="route.path" mode="horizontal" class="el-menu-vertical-demo" @select="handleSelect">
     <el-menu-item v-for="route in routes" :index="route.path" :route="{ path: route.path }">
       <el-icon>
         <HomeFilled v-if="route.name === 'HomePage'" />
@@ -12,14 +12,11 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { useRoute } from 'vue-router'
 import router from '@/router/index'
 import routes from '@/router/routes'
 
-// 设置默认激活tab
-const pathName = location.pathname.match(/^\/([^\/]*?)$/)
-const currentPath = pathName?.[0] ?? '/'
-const activeIndex = ref(currentPath)
+const route = useRoute()
 
 // open menu
 const handleSelect = (key: string, keyPath: string[]) => {
