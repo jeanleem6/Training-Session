@@ -1,41 +1,43 @@
 <template>
-  <div class="page__home">
-    <el-row :gutter="20">
-      <el-col :span="6">
-        <div class="grid-content ep-bg-purple">
-          <el-form-item label="Name">
-            <el-input v-model="form.name" placeholder="Please input" />
-          </el-form-item>
-        </div>
-      </el-col>
-      <el-col :span="6">
-        <div class="grid-content ep-bg-purple">
-          <el-form-item label="Region">
-            <el-select v-model="form.region" placeholder="please select your zone">
-              <el-option label="重庆" value="chongqing" />
-              <el-option label="成都" value="chengdu" />
-            </el-select>
-          </el-form-item>
-        </div>
-      </el-col>
-      <el-col :span="6">
-        <div class="grid-content ep-bg-purple"></div>
-      </el-col>
+  <Transition name="fade" mode="out-in">
+    <div class="page__home">
+      <el-row :gutter="20">
+        <el-col :span="6">
+          <div class="grid-content ep-bg-purple">
+            <el-form-item label="Name">
+              <el-input v-model="form.name" placeholder="Please input" />
+            </el-form-item>
+          </div>
+        </el-col>
+        <el-col :span="6">
+          <div class="grid-content ep-bg-purple">
+            <el-form-item label="Region">
+              <el-select v-model="form.region" placeholder="please select your zone">
+                <el-option label="重庆" value="chongqing" />
+                <el-option label="成都" value="chengdu" />
+              </el-select>
+            </el-form-item>
+          </div>
+        </el-col>
+        <el-col :span="6">
+          <div class="grid-content ep-bg-purple"></div>
+        </el-col>
 
-      <el-col :span="3">
-        <div class="grid-content ep-bg-purple"></div>
-      </el-col>
-      <el-col :span="3">
-        <div class="grid-content ep-bg-purple"></div>
-      </el-col>
-    </el-row>
+        <el-col :span="3">
+          <div class="grid-content ep-bg-purple"></div>
+        </el-col>
+        <el-col :span="3">
+          <div class="grid-content ep-bg-purple"></div>
+        </el-col>
+      </el-row>
 
-    <el-carousel v-if="isShow">
-      <el-carousel-item v-for="item in list" :key="item">
-        <el-image :src="item.Image" />
-      </el-carousel-item>
-    </el-carousel>
-  </div>
+      <el-carousel v-if="isShow">
+        <el-carousel-item v-for="item in list" :key="item">
+          <el-image :src="item.Image" />
+        </el-carousel-item>
+      </el-carousel>
+    </div>
+  </Transition>
 </template>
 
 <script lang="ts">
