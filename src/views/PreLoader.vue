@@ -36,5 +36,5 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div v-loading.fullscreen.lock="fullscreenLoading" class="prelaoder"></div>
+  <div v-loading.fullscreen.lock="fullscreenLoading" class="preloader"></div>
 </template>
