@@ -3,11 +3,15 @@ defineEmits(['prev', 'today', 'next'])
 </script>
 
 <template>
-  <div class="calendar-toolbar flex justify-between mb-2">
+  <div class="calendar-toolbar">
     <div class="left-tools flex items-center gap-2">
-      <el-button size="small" @click="$emit('prev')">上一月</el-button>
-      <el-button size="small" @click="$emit('today')">今日</el-button>
-      <el-button size="small" @click="$emit('next')">下一月</el-button>
+      <el-button size="small" @click="$emit('prev')">
+        <el-icon><ArrowLeftBold /></el-icon>
+      </el-button>
+      <el-button size="small" @click="$emit('today')"> Today </el-button>
+      <el-button size="small" @click="$emit('next')">
+        <el-icon><ArrowRightBold /></el-icon>
+      </el-button>
       <slot name="status" />
     </div>
     <div class="right-tabs">
@@ -16,9 +20,39 @@ defineEmits(['prev', 'today', 'next'])
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .calendar-toolbar {
-  border-bottom: 1px solid #ebeef5;
-  padding-bottom: 0.5rem;
+  $color-orange: orange;
+  $color-green: green;
+  $color-blue: blue;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+
+  .left-tools {
+    display: flex;
+    align-items: center;
+
+    :deep(> span) {
+      margin-left: 0.5rem;
+      font-size: 0.875rem;
+
+      i {
+        margin-right: 0.1rem;
+      }
+
+      &.todo i {
+        color: $color-orange;
+      }
+      &.done i {
+        color: $color-green;
+      }
+      &.delay i {
+        color: $color-blue;
+      }
+    }
+  }
 }
 </style>

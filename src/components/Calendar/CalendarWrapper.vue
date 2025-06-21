@@ -10,12 +10,13 @@ import CalendarEventContent from './CalendarEventContent.vue'
 const props = defineProps({
   activeView: String,
   events: Array,
+  eventCountMap: Object,
   dayMaxEvents: {
     type: Number,
     default: 2
   }
 })
-const emit = defineEmits(['event-click', 'show-more', 'view-dates-change'])
+const emit = defineEmits(['event-click', 'show-more', 'view-dates-change', 'hide-popover'])
 
 const calendarRef = ref()
 
@@ -30,6 +31,22 @@ watch(
   }
 )
 
+function getEventCount(event) {
+  const eventDate = dayjs(event.start).format('YYYY-MM-DD')
+  return props.eventCountMap[eventDate] || 0
+}
+
+function gotoDate(date, isToday = false) {
+  const calendarApi = calendarRef.value?.getApi()
+  if (isToday) {
+    calendarApi.today()
+  } else {
+    calendarApi.gotoDate(date)
+  }
+}
+
+defineExpose({ gotoDate })
+
 function setEventClassName(arg) {
   return arg.event.extendedProps.status
 }
@@ -43,28 +60,25 @@ const calendarOptions = computed(() => ({
     start: dayjs().subtract(1, 'month').startOf('month').format('YYYY-MM-DD'),
     end: dayjs().add(1, 'month').endOf('month').format('YYYY-MM-DD')
   },
-  dayMaxEvents: props.dayMaxEvents, // ✅ 限制每日最多顯示事件数量
+  fixedWeekCount: true,
+  dayMaxEventRows: true,
+  expandRows: true,
+  contentHeight: '100%',
+  // dayMaxEvents: props.dayMaxEvents, // ✅ 限制每日最多顯示事件数量
   eventClick({ event }) {
     emit('event-click', event)
   },
   moreLinkClick(info) {
-    // 手动找出触发“+n more”的按钮 DOM
-    // const moreLinkEl = info.dayEl.querySelector('.fc-more-link')
-
-    const dateStr = dayjs(info.date).format('YYYY-MM-DD')
-    const eventsInDay = props.events.filter((e) => dayjs(e.start).format('YYYY-MM-DD') === dateStr)
+    const eventsInDay = info.allSegs.map((seg) => seg.event)
 
     // 更精确地定位 `.fc-more` 按钮
-    const moreBtn = info.el?.querySelector('.fc-more-link') || info.jsEvent?.target?.closest('.fc-more-link')
-
-    if (!(moreBtn instanceof HTMLElement)) {
-      console.warn('未找到 .fc-more-link 對應的 DOM 元素')
-      return 'none'
-    }
+    const moreBtn = info.jsEvent.target
+    // console.log(info)
 
     emit('show-more', {
       events: eventsInDay,
-      el: moreBtn
+      el: moreBtn,
+      date: dayjs(info.date).format('YYYY-MM-DD')
     })
     return 'none' // 防止 FullCalendar 自己打開內建 popover
   },
@@ -75,7 +89,7 @@ const calendarOptions = computed(() => ({
 <template>
   <FullCalendar ref="calendarRef" :options="calendarOptions">
     <template #eventContent="{ event }">
-      <CalendarEventContent :event="event" />
+      <CalendarEventContent :event="event" :eventCount="getEventCount(event)" />
     </template>
   </FullCalendar>
 </template>
@@ -86,20 +100,50 @@ const calendarOptions = computed(() => ({
   $color-green: green;
   $color-blue: blue;
 
+  height: 100%;
+
   :deep(.fc-daygrid-day-frame) {
+    display: flex;
+    flex-direction: column-reverse;
+
     .fc-daygrid-day-top {
-      position: absolute;
+      width: 28px;
+      height: 10px;
+      align-self: flex-end;
+
+      .fc-daygrid-day-number {
+        position: absolute;
+        bottom: 0.2rem;
+        font-size: 14px;
+      }
+    }
+
+    .fc-daygrid-day-events {
+      height: 100%;
       bottom: 0;
-      right: 0;
-      opacity: 0.5;
     }
 
     .fc-daygrid-event {
       width: calc(100% - 8px);
-      margin: 4px;
-      padding: 4px 8px;
+      margin: 4px 4px 0px;
+      padding: 2px 8px;
       border-left: 2px solid;
       border-radius: 4px;
+      line-height: 1.2;
+
+      &::before,
+      &::after {
+        display: none;
+      }
+
+      &.fc-h-event {
+        border-width: 0;
+        border-left-width: 2px;
+
+        .fc-event-main {
+          color: inherit;
+        }
+      }
 
       &.todo {
         border-left-color: $color-orange;
@@ -124,18 +168,20 @@ const calendarOptions = computed(() => ({
         width: 100%;
       }
     }
+
+    .fc-more-link {
+      position: absolute;
+      bottom: -9px;
+      left: 50%;
+      padding: 0 0.5rem;
+      border-radius: 18px;
+      background-color: #f2f2f2;
+      font-size: 12px;
+      line-height: 18px;
+      color: #409eff;
+      transform: translateX(-50%);
+      cursor: pointer;
+    }
   }
-}
-.truncate {
-  max-width: 120px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-.fc-more-btn {
-  margin-top: 2px;
-  font-size: 12px;
-  color: #409eff;
-  cursor: pointer;
 }
 </style>
