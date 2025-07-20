@@ -10,7 +10,7 @@ import { dayjs } from 'element-plus'
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore'
 dayjs.extend(isSameOrBefore)
 
-const activeView = ref('dayGridMonth')
+const activeView = ref('listMonth') // dayGridMonth listMonth
 const events = ref([])
 const currentDate = ref(new Date())
 const loading = ref(true)
@@ -115,7 +115,7 @@ onMounted(() => {
 <template>
   <div class="page__container">
     <div class="page__inner">
-      <CalendarToolbar @prev="handlePrev" @today="handleToday" @next="handleNext">
+      <CalendarToolbar :currentDate="currentDate" @prev="handlePrev" @today="handleToday" @next="handleNext">
         <template #status>
           <span class="todo"><i>●</i>Todo</span>
           <span class="done"><i>●</i>Done</span>

@@ -1,5 +1,16 @@
 <script setup>
+import { dayjs } from 'element-plus'
+import { computed } from 'vue'
+
+const props = defineProps({
+  currentDate: {
+    type: Date,
+    default: new Date()
+  }
+})
 defineEmits(['prev', 'today', 'next'])
+
+const formatDate = computed(() => dayjs(props.currentDate).format('YYYY / MM'))
 </script>
 
 <template>
@@ -14,6 +25,9 @@ defineEmits(['prev', 'today', 'next'])
       </el-button>
       <slot name="status" />
     </div>
+
+    <div class="current_day">{{ formatDate }}</div>
+
     <div class="right-tabs">
       <slot name="tabs" />
     </div>
@@ -53,6 +67,11 @@ defineEmits(['prev', 'today', 'next'])
         color: $color-blue;
       }
     }
+  }
+
+  .current_day {
+    font-size: 0.875rem;
+    color: rgba(0, 0, 0, 0.6);
   }
 }
 </style>

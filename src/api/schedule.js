@@ -15,7 +15,7 @@ export const getScheduleList = () =>
         id: '1-1',
         title: 'Event 1-1',
         start: '2025-06-05 10:00',
-        end: '2025-06-05 18:00',
+        end: '2025-06-06 18:00',
         status: 'done'
       },
       {
@@ -32,13 +32,13 @@ export const getScheduleList = () =>
         end: '2025-06-05 18:00',
         status: 'done'
       },
-      // {
-      //   id: '1-4',
-      //   title: 'Event 1-4',
-      //   start: '2025-06-05 10:00',
-      //   end: '2025-06-05 18:00',
-      //   status: 'done'
-      // },
+      {
+        id: '1-4',
+        title: 'Event 1-4',
+        start: '2025-06-05 10:00',
+        end: '2025-06-05 18:00',
+        status: 'done'
+      },
       {
         id: '2',
         title: 'Event 2',

@@ -1,5 +1,4 @@
 <script setup>
-import { defineProps } from 'vue'
 import { dayjs } from 'element-plus'
 
 const props = defineProps({
