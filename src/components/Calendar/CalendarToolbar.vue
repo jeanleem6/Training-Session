@@ -1,6 +1,7 @@
 <script setup>
 import { dayjs } from 'element-plus'
 import { computed } from 'vue'
+import { ArrowLeftBold, ArrowRightBold } from '@element-plus/icons-vue'
 
 const props = defineProps({
   currentDate: {
@@ -55,6 +56,7 @@ const formatDate = computed(() => dayjs(props.currentDate).format('YYYY / MM'))
 
       i {
         margin-right: 0.1rem;
+        font-style: normal;
       }
 
       &.todo i {
@@ -63,7 +65,7 @@ const formatDate = computed(() => dayjs(props.currentDate).format('YYYY / MM'))
       &.done i {
         color: $color-green;
       }
-      &.delay i {
+      &.on i {
         color: $color-blue;
       }
     }

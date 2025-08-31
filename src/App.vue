@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { onMounted, nextTick, version } from 'vue'
-import MainMenus from '@/components/MainMenus.vue'
+import GlobalHeader from './components/GlobalHeader.vue'
 import PreLoader from '@/views/PreLoader.vue'
 
-import { useLoaderState } from '@/store/isloading'
-import { currentThemeState } from '@/store/currentTheme'
+import { useDeviceStore, useLoaderState, useThemeStore } from '@/store'
 
+const deviceStore = useDeviceStore()
 const isLoading = useLoaderState()
-const currentTheme = currentThemeState()
-
+const themeStore = useThemeStore()
+const layoutMode = computed(() => deviceStore.layoutMode)
 onMounted(() => {
   console.log(`App Mounted! Vue version: v${version}`)
 
@@ -19,9 +19,9 @@ onMounted(() => {
 </script>
 
 <template>
-  <el-container>
-    <main-menus></main-menus>
-    <PreLoader v-if="isLoading.state" :class="currentTheme.state" />
+  <el-container :class="`layout-${layoutMode}`">
+    <GlobalHeader />
+    <PreLoader v-if="isLoading.state" :class="themeStore.mode" />
     <router-view v-show="!isLoading.state" v-slot="{ Component }">
       <keep-alive>
         <component :is="Component" />
@@ -34,6 +34,6 @@ onMounted(() => {
 .el-container {
   flex-direction: column;
   height: 100vh;
-  background-color: #f2f2f2;
+  background-color: var(--bg-color-main);
 }
 </style>

@@ -1,0 +1,107 @@
+@use './_variables.scss' as *;
+
+// 單行省略
+@mixin ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+// 多行省略（最多2行）
+@mixin multi-ellipsis($line: 2) {
+  display: -webkit-box;
+  -webkit-line-clamp: $line;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+// flex 快捷
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+// 公用盒子（@params：padding、背景、圓角）
+@mixin white-box($padding: $padding-base, $radius: $border-radius-large, $bg: #fff) {
+  padding: $padding;
+  border-radius: $radius;
+  background: $bg;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.04);
+}
+
+// 媒合狀態
+@mixin status {
+  display: inline-block;
+  padding: 0 0.25rem;
+  border-radius: $border-radius;
+  font-size: $font-size-small;
+  line-height: 1.25rem;
+
+  // 媒合中
+  &.matching {
+    background-color: $light-orang-color-1;
+    color: $primary-color;
+  }
+  // 處理中
+  &.processing {
+    background-color: $light-blue-color;
+    color: $blue-color;
+  }
+  // 等待付款
+  &.pending__payment {
+    background-color: $light-red-color;
+    color: $danger-color;
+  }
+  // 已付款
+  &.paid {
+    background-color: $light-green-color;
+    color: $success-color;
+  }
+}
+
+// 預定義模板内容為 html 的標簽樣式
+@mixin html-content {
+  p {
+    margin-bottom: 1rem;
+  }
+
+  ul,
+  ol {
+    margin: 1rem 0 1rem 1.5rem;
+  }
+
+  a {
+    color: $primary-color;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+
+    td {
+      padding: 0.2rem 0.5rem;
+      border: 1px solid $light-grey-color;
+    }
+  }
+
+  blockquote {
+    margin: 1rem;
+    padding-left: 1rem;
+    border-left: 0.25rem solid $text-lighter-color;
+  }
+
+  .orange {
+    color: $primary-color;
+  }
+}

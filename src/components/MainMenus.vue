@@ -15,6 +15,7 @@
 import { useRoute } from 'vue-router'
 import router from '@/router/index'
 import routes from '@/router/routes'
+import { HomeFilled, Calendar, EditPen } from '@element-plus/icons-vue'
 
 const route = useRoute()
 

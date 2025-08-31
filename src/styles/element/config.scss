@@ -1,0 +1,42 @@
+// styles/element/config.scss
+// 亮色主題配置
+$element-light-colors: (
+  'primary': (
+    'base': #ff8a00
+  ),
+  'success': (
+    'base': #34c759
+  ),
+  'warning': (
+    'base': #ff8a00
+  ),
+  'danger': (
+    'base': #ff3b30
+  ),
+  'info': (
+    'base': #dcdcdc
+  )
+) !default;
+
+// 暗色主題配置
+$element-dark-colors: (
+  'primary': (
+    'base': #589ef8
+  ),
+  'success': (
+    'base': #4cd964
+  ),
+  'warning': (
+    'base': #ffcc00
+  ),
+  'danger': (
+    'base': #ff3b30
+  ),
+  'info': (
+    'base': #8e8e93
+  )
+) !default;
+
+// 暗色主題背景和文字顏色
+$dark-bg-color: #1a1a1a !default;
+$dark-text-color: #ffffff !default;

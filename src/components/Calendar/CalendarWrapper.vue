@@ -155,7 +155,7 @@ const calendarOptions = computed(() => ({
         background-color: rgba($color-green, 0.1);
         color: $color-green;
       }
-      &.delay {
+      &.on {
         border-left-color: $color-blue;
         background-color: rgba($color-blue, 0.1);
         color: $color-blue;

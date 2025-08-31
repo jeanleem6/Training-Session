@@ -1,0 +1,39 @@
+// styles/element/variables.scss
+@use 'sass:map';
+
+// 使用公開的變量命名
+$light-colors: (
+  'primary': (
+    'base': #ff8a00
+  ),
+  'success': (
+    'base': #34c759
+  ),
+  'warning': (
+    'base': #e6a23c
+  ),
+  'danger': (
+    'base': #f56c6c
+  ),
+  'info': (
+    'base': #909399
+  )
+) !default;
+
+$dark-colors: (
+  'primary': (
+    'base': #ff8a00
+  ),
+  'success': (
+    'base': #4cd964
+  ),
+  'warning': (
+    'base': #e6a23c
+  ),
+  'danger': (
+    'base': #f56c6c
+  ),
+  'info': (
+    'base': #8e8e93
+  )
+) !default;
