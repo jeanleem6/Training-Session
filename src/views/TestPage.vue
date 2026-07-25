@@ -28,4 +28,15 @@ const counter = makeCounter()
 
 console.log(counter())
 console.log(counter())
+
+const getImageMetaData = async (url: string) => {
+  const imgInfo = await fetch(url, { method: 'HEAD' })
+  return {
+    type: imgInfo.headers.get('content-type'),
+    size: imgInfo.headers.get('content-length')
+  }
+}
+getImageMetaData('http://localhost:5001/images/5.jpg').then((res) => {
+  console.log(res.type, Math.round(Number(res.size) / 1024) + 'KB')
+})
 </script>
