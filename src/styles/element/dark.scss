@@ -1,0 +1,23 @@
+// styles/element/dark.scss
+@use 'sass:map';
+@use './variables.scss' as vars;
+
+// 導入 Element Plus 暗色主題變量
+@forward 'element-plus/theme-chalk/src/dark/var.scss' with (
+  $colors: vars.$dark-colors
+);
+
+// 導入暗色主題樣式
+@use 'element-plus/theme-chalk/src/dark/css-vars.scss' as *;
+
+// 暗色主題下的 CSS 變量
+:root.dark {
+  --el-color-primary: #{map.get(vars.$dark-colors, 'primary', 'base')};
+  --el-color-success: #{map.get(vars.$dark-colors, 'success', 'base')};
+  --el-color-warning: #{map.get(vars.$dark-colors, 'warning', 'base')};
+  --el-color-danger: #{map.get(vars.$dark-colors, 'danger', 'base')};
+  --el-color-info: #{map.get(vars.$dark-colors, 'info', 'base')};
+  --bg-color-header: #1a1a1a;
+  --bg-color-main: rgba(0, 0, 0, 0.9);
+  --text-color: var(--el-color-primary-light-9);
+}

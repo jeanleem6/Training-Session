@@ -3,7 +3,7 @@
     <el-menu-item v-for="route in routes" :index="route.path" :route="{ path: route.path }">
       <el-icon>
         <HomeFilled v-if="route.name === 'HomePage'" />
-        <Grid v-if="route.name === 'ListPage'" />
+        <Calendar v-if="route.name === 'FullCalendar'" />
         <EditPen v-if="route.name === 'TestPage'" />
       </el-icon>
       {{ route.name }}
@@ -15,6 +15,7 @@
 import { useRoute } from 'vue-router'
 import router from '@/router/index'
 import routes from '@/router/routes'
+import { HomeFilled, Calendar, EditPen } from '@element-plus/icons-vue'
 
 const route = useRoute()
 

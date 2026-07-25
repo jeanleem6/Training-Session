@@ -1,0 +1,24 @@
+// styles/element/index.scss
+@use 'sass:map';
+@use './variables.scss' as vars;
+
+// 導入 Element Plus 默認樣式（亮色主題）
+@forward 'element-plus/theme-chalk/src/common/var.scss' with (
+  $colors: vars.$light-colors
+);
+
+// 導入所有組件樣式
+@use 'element-plus/theme-chalk/src/index.scss' as *;
+
+// 基礎樣式，主題切換由您的插件控制
+:root {
+  // 使用 CSS 變量，讓您的插件可以動態修改
+  --el-color-primary: #{map.get(vars.$light-colors, 'primary', 'base')};
+  --el-color-success: #{map.get(vars.$light-colors, 'success', 'base')};
+  --el-color-warning: #{map.get(vars.$light-colors, 'warning', 'base')};
+  --el-color-danger: #{map.get(vars.$light-colors, 'danger', 'base')};
+  --el-color-info: #{map.get(vars.$light-colors, 'info', 'base')};
+  --bg-color-header: #fff;
+  --bg-color-main: #f7f7fa;
+  --text-color: rgba(0, 0, 0, 0.9);
+}

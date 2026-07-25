@@ -3,14 +3,14 @@
     <div class="page__home">
       <el-row :gutter="20">
         <el-col :span="6">
-          <div class="grid-content ep-bg-purple">
+          <div class="grid-content">
             <el-form-item label="Name">
               <el-input v-model="form.name" placeholder="Please input" />
             </el-form-item>
           </div>
         </el-col>
         <el-col :span="6">
-          <div class="grid-content ep-bg-purple">
+          <div class="grid-content">
             <el-form-item label="Region">
               <el-select v-model="form.region" placeholder="please select your zone">
                 <el-option label="重庆" value="chongqing" />
@@ -20,14 +20,14 @@
           </div>
         </el-col>
         <el-col :span="6">
-          <div class="grid-content ep-bg-purple"></div>
+          <div class="grid-content"></div>
         </el-col>
 
         <el-col :span="3">
-          <div class="grid-content ep-bg-purple"></div>
+          <div class="grid-content"></div>
         </el-col>
         <el-col :span="3">
-          <div class="grid-content ep-bg-purple"></div>
+          <div class="grid-content"></div>
         </el-col>
       </el-row>
 
@@ -75,8 +75,6 @@ onDeactivated(() => {
 </script>
 
 <style lang="scss">
-$ep-bg-purple: #d3dce6;
-
 .page__home {
   padding: 20px;
 }
@@ -98,8 +96,5 @@ $ep-bg-purple: #d3dce6;
   .el-form-item {
     margin-bottom: 0;
   }
-}
-.ep-bg-purple {
-  background-color: $ep-bg-purple;
 }
 </style>
